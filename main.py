@@ -1,4 +1,5 @@
 import tkinter as tk
+import ttkbootstrap as ttk
 import time
 import global_vals
 from Sort import SortingAlgorithms
@@ -95,20 +96,30 @@ def execute_algorithm():
     output_text.insert(tk.END, "\n")  # 添加换行符
     output_text.insert(tk.END, global_vals.extra_output)  # 在输出框中显示额外输出信息
 def clear_output():
-    input_entry.delete(0, tk.END)  # 清空输入框中的内容
+    input_entry.delete("1.0", tk.END)  # 清空输入框中的内容
     output_text.delete("1.0", tk.END)  # 清空输出框中的内容
     # description_text.delete("1.0",tk.END)
 
 # 创建主窗口
-window = tk.Tk()
-window.title("算法工具1.0")
-window.geometry("600x700")  # 调整窗口大小
+# window = tk.Tk()
+window = ttk.Window(
+      title="算法工具1.0",        #设置窗口的标题
+        themename="litera",     #设置主题
+        size=(600,600),        #窗口的大小
+        position=(100,100),     #窗口所在的位置
+        minsize=(0,0),          #窗口的最小宽高
+        maxsize=(1920,1080),    #窗口的最大宽高
+        resizable=None,         #设置窗口是否可以更改大小
+        alpha=1.0,              #设置窗口的透明度(0.0完全透明）
+)
+# window.title("算法工具1.0")
+# window.geometry("500x500")  # 调整窗口大小
 # 算法类别选择下拉菜单和标签
-category_label = tk.Label(window, text="选择算法类别:")
+category_label = ttk.Label(window, text="选择算法类别:")
 category_label.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
 algorithm_categories = ["排序", "搜索", "字符串算法"]  # 可选择的算法类别
 algorithm_category_dropdown = tk.StringVar(window)
-algorithm_category_dropdown.set("选择算法类别")  # 默认提示文本
+algorithm_category_dropdown.set("算法类别")  # 默认提示文本
 algorithm_category_dropdown.trace("w", update_algorithm_menu)  # 监听选择的类别变化
 algorithm_category_menu = tk.OptionMenu(window, algorithm_category_dropdown, *algorithm_categories)
 algorithm_category_menu.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W)
@@ -117,7 +128,7 @@ algorithm_category_menu.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W)
 algorithm_label = tk.Label(window, text="选择算法:")
 algorithm_label.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
 algorithm_dropdown = tk.StringVar(window)
-algorithm_dropdown.set("选择排序算法")  # 默认提示文本
+algorithm_dropdown.set("具体算法")  # 默认提示文本
 algorithm_menu = tk.OptionMenu(window, algorithm_dropdown, "选择排序算法")
 algorithm_menu.grid(row=1, column=1, padx=10, pady=10, sticky=tk.W)
 
